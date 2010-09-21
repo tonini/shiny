@@ -17,6 +17,11 @@ Some other effect examples:
   puts "nice and underlined".shell.underline
   puts "other side, please".shell.negative
 
+Helpers to list available colors and effect methods
+
+  Shiny.show_colors
+  Shiny.show_effects
+
 == Note on Patches/Pull Requests
 
 * Fork the project.
