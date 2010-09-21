@@ -1,9 +1,24 @@
 = shiny
 
-Description goes here.
+Shiny gives you some common ansi escape sequences, which are available over a defined proxy method called 'shell', in the core ruby String class.
+
+Some colors examples:
+
+  puts "magenta".shell.magenta
+  puts "bold blue".shell.bold.blue
+  puts "yellow on cyan".shell.yellow.on_cyan
+  puts "bright blue on green".shell.bright_blue.on_green
+  puts "red on bright blue".shell.red.on_bright_blue
+
+Some other effect examples:
+
+  puts "bold".shell.bold
+  puts "oh! i'm blinking".shell.blink
+  puts "nice and underlined".shell.underline
+  puts "other side, please".shell.negative
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
