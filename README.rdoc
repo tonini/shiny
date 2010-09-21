@@ -2,6 +2,12 @@
 
 Shiny gives you some common ansi escape sequences, which are available over a defined proxy method called 'shell', in the core ruby String class.
 
+== Installation
+
+  $ gem install shiny
+
+== Usage
+
 Some colors examples:
 
   puts "magenta".shell.magenta
