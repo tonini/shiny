@@ -1,4 +1,4 @@
-require 'lib/shiny/ansi'
+require 'shiny/ansi'
 
 class Shiny
 
