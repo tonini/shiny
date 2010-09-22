@@ -53,4 +53,8 @@ describe Shiny do
     "\e[47m\e[31mred on white\e[0m\e[0m".shell.blank == "red on white"
   end
 
+  it 'should run also with the alias method' do
+    "try the alias method".shell.red.should == "\e[31mtry the alias method\e[0m"
+  end
+
 end

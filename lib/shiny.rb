@@ -73,4 +73,5 @@ end
 
 class String
   def shell; Shiny.new(self); end
+  alias ansi shell
 end
