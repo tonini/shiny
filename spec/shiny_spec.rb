@@ -18,11 +18,11 @@ describe Shiny do
   end
 
   it 'should return an on bright magenta string' do
-    "on bright magenta".shell.on_bright_magenta == "\e[105mon bright magenta\e[0m"
+    "on bright magenta".shell.on_bright_magenta.should == "\e[105mon bright magenta\e[0m"
   end
 
   it 'should return a red on white string' do
-    "red on white".shell.red.on_white == "\e[47m\e[31mred on white\e[0m\e[0m"
+    "red on white".shell.red.on_white.should == "\e[47m\e[31mred on white\e[0m\e[0m"
   end
 
   it 'should return a bright blue string' do
@@ -34,23 +34,23 @@ describe Shiny do
   end
 
   it 'should return an underlined string' do
-    "underline".shell.underline == "\e[4munderline\e[0m"
+    "underline".shell.underline.should == "\e[4munderline\e[0m"
   end
 
   it 'should return a bold string' do
-    "bold".shell.bold == "\e[1mbold\e[0m"
+    "bold".shell.bold.should == "\e[1mbold\e[0m"
   end
 
   it 'should return a negative string' do
-    "negative".shell.negative == "\e[7mnegative\e[0m"
+    "negative".shell.negative.should == "\e[7mnegative\e[0m"
   end
 
   it 'should return a blinking string' do
-    "blinking".shell.blink == "\e[5mblinking\e[0m"
+    "blinking".shell.blink.should == "\e[5mblinking\e[0m"
   end
 
   it 'should clear all ansi escape sequences from string' do
-    "\e[47m\e[31mred on white\e[0m\e[0m".shell.blank == "red on white"
+    "\e[47m\e[31mred on white\e[0m\e[0m".shell.blank.should == "red on white"
   end
 
   it 'should run also with the alias method' do
