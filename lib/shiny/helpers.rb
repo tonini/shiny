@@ -1,3 +1,5 @@
+require 'shiny/ansi'
+
 module Helpers
   def colors
     ANSI::COLORS
