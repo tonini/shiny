@@ -1,6 +1,9 @@
 require 'shiny/ansi'
+require 'shiny/helpers'
 
 class Shiny
+
+  extend Helpers
 
   # Shiny gives you some common ansi escape sequences, which
   # are available over a defined proxy method called 'shell', in
@@ -39,38 +42,16 @@ class Shiny
     @string
   end
 
+  # remove all ansi escape sequences
   def blank
     @string.gsub(/\e\[[0-9]+m/,'')
   end
 
-  # some helpers to see how shiny the ansi sequences are
-  class << self
-    def colors
-      ANSI::COLORS
-    end
-
-    def effects
-      ANSI::EFFECTS
-    end
-
-    def show_colors
-      ANSI::COLORS.each do |color|
-        [color, "bright_#{color}", "on_#{color}", "on_bright_#{color}"].each do |code|
-          $stdout.puts ANSI::ESCAPE_SEQUENCES[code] + code + ANSI::ESCAPE_SEQUENCES['reset']
-        end
-      end
-      $stdout.flush
-    end
-
-    def show_effects
-      ANSI::EFFECTS.each do |code|
-        $stdout.puts ANSI::ESCAPE_SEQUENCES[code] + code + ANSI::ESCAPE_SEQUENCES['reset']
-      end
-      $stdout.flush
-    end
-  end
 end
 
+# instead to extend the ruby core string class with all the ansi
+# escape methods, there is a proxy method called shell, to serve
+# all the ansi escape functionality
 class String
   def shell; Shiny.new(self); end
   alias ansi shell
