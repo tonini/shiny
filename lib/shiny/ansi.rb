@@ -1,5 +1,26 @@
-module ANSI
-  ESCAPE_SEQUENCES = {
+module Shiny
+  # Shiny::ANSI gives you some common ansi escape sequences, which
+  # are available over a defined proxy method called 'shell', in
+  # the core ruby String class.
+  #
+  # Some colors examples:
+  #
+  # puts "magenta".shell.magenta
+  # puts "bold blue".shell.bold.blue
+  # puts "yellow on cyan".shell.yellow.on_cyan
+  # puts "bright blue on green".shell.bright_blue.on_green
+  # puts "red on bright blue".shell.red.on_bright_blue
+  #
+  # Some other effect examples:
+  #
+  # puts "bold".shell.bold
+  # puts "oh! i'm blinking".shell.blink
+  # puts "nice and underlined".shell.underline
+  # puts "other side, please".shell.negative
+  class ANSI < Basic
+
+    # ansi escape sequences list
+    CODES = {
       'black'             =>   "\e[30m",
       'red'               =>   "\e[31m",
       'green'             =>   "\e[32m",
@@ -37,8 +58,29 @@ module ANSI
       'underline'         =>    "\e[4m",
       'negative'          =>    "\e[7m",
       'blink'             =>    "\e[5m"
-  }
+    }
 
-  COLORS  = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
-  EFFECTS = ['bold', 'underline', 'negative', 'blink']
+    # list of available ansi colors
+    COLORS  = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+    # list of available ansi effects
+    EFFECTS = ['bold', 'underline', 'negative', 'blink']
+
+    # generate instance methods
+    CODES.each do |code, value|
+      next if code == 'reset'
+      reset = CODES['reset']
+      class_eval <<-DEF
+        def #{code}
+          @string = "#{value}" + @string + "#{reset}"
+          ANSI.new(@string)
+        end
+      DEF
+    end
+
+    # remove all ansi escape sequences
+    def blank
+      @string.gsub(/\e\[[0-9]+m/,'')
+    end
+
+  end
 end

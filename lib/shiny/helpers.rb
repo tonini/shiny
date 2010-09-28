@@ -1,27 +1,29 @@
 require 'shiny/ansi'
 
-module Helpers
-  def colors
-    ANSI::COLORS
-  end
+module Shiny
+  module Helpers
+    def colors
+      ANSI::COLORS
+    end
 
-  def effects
-    ANSI::EFFECTS
-  end
+    def effects
+      ANSI::EFFECTS
+    end
 
-  def show_colors
-    ANSI::COLORS.each do |color|
-      [color, "bright_#{color}", "on_#{color}", "on_bright_#{color}"].each do |code|
-        $stdout.puts ANSI::ESCAPE_SEQUENCES[code] + code + ANSI::ESCAPE_SEQUENCES['reset']
+    def show_colors
+      ANSI::COLORS.each do |color|
+        [color, "bright_#{color}", "on_#{color}", "on_bright_#{color}"].each do |code|
+          $stdout.puts ANSI::CODES[code] + code + ANSI::CODES['reset']
+        end
       end
+      $stdout.flush
     end
-    $stdout.flush
-  end
 
-  def show_effects
-    ANSI::EFFECTS.each do |code|
-      $stdout.puts ANSI::ESCAPE_SEQUENCES[code] + code + ANSI::ESCAPE_SEQUENCES['reset']
+    def show_effects
+      ANSI::EFFECTS.each do |code|
+        $stdout.puts ANSI::CODES[code] + code + ANSI::CODES['reset']
+      end
+      $stdout.flush
     end
-    $stdout.flush
   end
 end
