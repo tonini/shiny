@@ -41,15 +41,6 @@ Some other html effect examples:
   "overline".html.overline
   "line-through".html.line_through
 
-Helpers to list available colors and effect methods
-
-  Shiny.colors  # returns array with colors
-  Shiny.effects # returns array with effects
-
-  # call it in terminal to see it in action
-  Shiny.show_colors
-  Shiny.show_effects
-
 == Note on Patches/Pull Requests
 
 * Fork the project.
