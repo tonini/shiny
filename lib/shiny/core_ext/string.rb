@@ -3,8 +3,8 @@ require 'shiny/ansi'
 require 'shiny/html'
 
 # instead to extend the ruby core string class with all the ansi
-# escape methods, there is a proxy method called shell, to serve
-# all the ansi escape functionality
+# escape and html methods, there are two proxy methods called ansi and
+# html, to serve all the functionality.
 class String
   def ansi
     Shiny::ANSI.new(self)

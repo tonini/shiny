@@ -47,20 +47,19 @@ module Shiny
     SPAN_BEGIN = "<span>"
     SPAN_END   = "</span>"
 
-    # generate instance methods
+    # generate html format instance methods
     FORMATS.each do |name, value|
       class_eval <<-DEF
         def #{name}
           @string = "#{value}" + @string + "#{SPAN_END}"
-          HTML.new(@string)
+          self
         end
       DEF
     end
 
-    # remove all html format tags
+    # remove all html span format tags
     def blank
       @string.gsub(/(<span [^>]+>|<\/span>)/, '')
     end
-
   end
 end

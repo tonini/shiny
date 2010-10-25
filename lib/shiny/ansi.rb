@@ -62,6 +62,7 @@ module Shiny
 
     # list of available ansi colors
     COLORS  = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+
     # list of available ansi effects
     EFFECTS = ['bold', 'underline', 'negative', 'blink']
 
@@ -72,7 +73,7 @@ module Shiny
       class_eval <<-DEF
         def #{code}
           @string = "#{value}" + @string + "#{reset}"
-          ANSI.new(@string)
+          self
         end
       DEF
     end
@@ -81,6 +82,5 @@ module Shiny
     def blank
       @string.gsub(/\e\[[0-9]+m/,'')
     end
-
   end
 end
