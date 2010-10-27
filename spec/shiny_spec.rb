@@ -61,27 +61,27 @@ describe Shiny do
 
   describe "#html" do
     it 'should return a bold string' do
-      "bold".html.bold.should == "<span style='font-weight: bold;'>bold</span>"
+      "bold".html.bold.should == '<span style="font-weight: bold;">bold</span>'
     end
 
     it 'should return a underlined string' do
-      "underline".html.underline.should == "<span style='text-decoration: underline;'>underline</span>"
+      "underline".html.underline.should == '<span style="text-decoration: underline;">underline</span>'
     end
 
     it 'should return a overlined string' do
-      "overline".html.overline.should == "<span style='text-decoration: overline;'>overline</span>"
+      "overline".html.overline.should == '<span style="text-decoration: overline;">overline</span>'
     end
 
     it 'should return a line-through string' do
-      "line-through".html.line_through.should == "<span style='text-decoration: line-through;'>line-through</span>"
+      "line-through".html.line_through.should == '<span style="text-decoration: line-through;">line-through</span>'
     end
 
     it 'should return a blinking string' do
-      "blink".html.blink.should == "<span style='text-decoration: blink;'>blink</span>"
+      "blink".html.blink.should == '<span style="text-decoration: blink;">blink</span>'
     end
 
     it 'should clear all html formats from string' do
-      "<span style='font-weight: bold;'>i'm blank now!</span>".html.blank.should == "i'm blank now!"
+      '<span style="font-weight: bold;">i\'m blank now!</span>'.html.blank.should == "i'm blank now!"
     end
   end
 
