@@ -10,6 +10,8 @@ Gem::Specification.new do |s|
   s.files        = Dir["{lib,spec}/**/*", "[A-Z]*"]
   s.require_path = "lib"
 
+  s.add_development_dependency("rspec", ">= 2.0.0")
+
   s.rubyforge_project = s.name
   s.required_rubygems_version = ">= 1.3.4"
 end
