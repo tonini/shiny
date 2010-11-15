@@ -1,6 +1,8 @@
 module Shiny
   module Helpers
-
+    # Send a message to the $stdout stream
+    #
+    #y
     def say(message, options={})
       options[:linebreak] = true unless options.has_key?(:linebreak)
 
@@ -11,16 +13,25 @@ module Shiny
       $stdout.print message
     end
 
+    # Log a message in to a logfile
+    #
+    #
     def log(message, filename="logfile.log")
       File.open(filename, "a+") do |f|
         f << "#{Time.now}: #{message}\n"
       end
     end
 
+    # Send a linebreak to the $stdout stream
+    #
+    #
     def linebreak(amount=1)
       $stdout.print "\n" * amount
     end
 
+    # Wrap a message with a special sign and send it to the $stdout stream
+    #
+    #
     def wrap(message, sign="#")
       sign = sign[0] if  sign.length > 1
       around = sign * (message.length + 4) + "\n"
