@@ -1,88 +1,74 @@
+# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Shiny do
 
-  # overwrite for testing
-  class Shiny::Basic
-    def ==(string)
-      to_s == string
+  describe "#say" do
+    it "should print string to the stdout stream" do
+      $stdout.should_receive(:print).with("hey dude!\n")
+      Shiny.say("hey dude!")
+    end
+
+    it "should print string without a linebreak" do
+      $stdout.should_receive(:print).with("hey dude, no linebreak please")
+      Shiny.say("hey dude, no linebreak please", :linebreak => false)
+    end
+
+    it "should print the string as error formated"do
+      $stdout.should_receive(:print).with("\e[31mOh, there is an error!\e[0m\n")
+      Shiny.say("Oh, there is an error!", :type => :error)
+    end
+
+    it "should print the string as success formated"do
+      $stdout.should_receive(:print).with("\e[32mSuccessfully\e[0m\n")
+      Shiny.say("Successfully", :type => :success)
     end
   end
 
-  describe "#ansi" do
-    it 'should return a green string' do
-      "green".shell.green.should == "\e[32mgreen\e[0m"
+  describe "#linebreak" do
+    it "should print a linebreak" do
+      $stdout.should_receive(:print).with("\n")
+      Shiny.linebreak
     end
 
-    it 'should return an on yellow string' do
-      "on yellow".shell.on_yellow.should == "\e[43mon yellow\e[0m"
-    end
-
-    it 'should return an on bright magenta string' do
-      "on bright magenta".shell.on_bright_magenta.should == "\e[105mon bright magenta\e[0m"
-    end
-
-    it 'should return a red on white string' do
-      "red on white".shell.red.on_white.should == "\e[47m\e[31mred on white\e[0m\e[0m"
-    end
-
-    it 'should return a bright blue string' do
-      "bright blue".shell.bright_blue.should == "\e[94mbright blue\e[0m"
-    end
-
-    it 'should return a black on bright green string' do
-      "black on bright green".shell.black.on_bright_green.should == "\e[102m\e[30mblack on bright green\e[0m\e[0m"
-    end
-
-    it 'should return an underlined string' do
-      "underline".shell.underline.should == "\e[4munderline\e[0m"
-    end
-
-    it 'should return a bold string' do
-      "bold".shell.bold.should == "\e[1mbold\e[0m"
-    end
-
-    it 'should return a negative string' do
-      "negative".shell.negative.should == "\e[7mnegative\e[0m"
-    end
-
-    it 'should return a blinking string' do
-      "blinking".shell.blink.should == "\e[5mblinking\e[0m"
-    end
-
-    it 'should clear all ansi escape sequences from string' do
-      "\e[47m\e[31mred on white\e[0m\e[0m".shell.blank.should == "red on white"
-    end
-
-    it 'should run also with the alias method' do
-      "try the alias method".shell.red.should == "\e[31mtry the alias method\e[0m"
+    it "should print 3 linebreaks" do
+      $stdout.should_receive(:print).with("\n\n\n")
+      Shiny.linebreak(3)
     end
   end
 
-  describe "#html" do
-    it 'should return a bold string' do
-      "bold".html.bold.should == '<span style="font-weight: bold;">bold</span>'
+  describe "#wrap" do
+    it "should print a wrapped string" do
+      output =  "#####################\n"
+      output += "# Hello I'm wrapped #\n"
+      output += "#####################\n"
+
+      $stdout.should_receive(:print).with(output)
+      Shiny.wrap("Hello I'm wrapped")
     end
 
-    it 'should return a underlined string' do
-      "underline".html.underline.should == '<span style="text-decoration: underline;">underline</span>'
-    end
+    it "should print a wrapped string with other wrap sign" do
+      output =  "*********************\n"
+      output += "* Hello I'm wrapped *\n"
+      output += "*********************\n"
 
-    it 'should return a overlined string' do
-      "overline".html.overline.should == '<span style="text-decoration: overline;">overline</span>'
-    end
-
-    it 'should return a line-through string' do
-      "line-through".html.line_through.should == '<span style="text-decoration: line-through;">line-through</span>'
-    end
-
-    it 'should return a blinking string' do
-      "blink".html.blink.should == '<span style="text-decoration: blink;">blink</span>'
-    end
-
-    it 'should clear all html formats from string' do
-      '<span style="font-weight: bold;">i\'m blank now!</span>'.html.blank.should == "i'm blank now!"
+      $stdout.should_receive(:print).with(output)
+      Shiny.wrap("Hello I'm wrapped", "*")
     end
   end
 
+  describe "#log" do
+    it "should log the message in a log file" do
+      Shiny.log("please log me in!")
+      File.exists?("logfile.log").should == true
+      File.delete("logfile.log")
+    end
+
+    it "should log the message to the 'mylogfile.log' file" do
+      Shiny.log("Arrrr, another filename", "mylogfile.log")
+      File.exists?("mylogfile.log").should == true
+      File.delete("mylogfile.log")
+    end
+  end
 end
+
