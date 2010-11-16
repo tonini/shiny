@@ -2,46 +2,46 @@ module Shiny
   class HTML < Basic
     # List of the 17 w3c supported color names
     # @see http://www.w3.org/TR/CSS21/syndata.html#value-def-color
-    FORMATS = {
-      :black        => '<span style="color: black;">',
-      :silver       => '<span style="color: silver;">',
-      :gray         => '<span style="color: gray;">,',
-      :white        => '<span style="color: white;">',
-      :maroon       => '<span style="color: maroon;">',
-      :red          => '<span style="color: red;">',
-      :purple       => '<span style="color: purple;">',
-      :fuchsia      => '<span style="color: fuchsia;">',
-      :green        => '<span style="color: green;">',
-      :lime         => '<span style="color: lime;">',
-      :olive        => '<span style="color: olive;">',
-      :yellow       => '<span style="color: yellow;">',
-      :navy         => '<span style="color: navy;">',
-      :blue         => '<span style="color: blue;">',
-      :teal         => '<span style="color: teal;">',
-      :aqua         => '<span style="color: aqua;">',
-      :orange       => '<span style="color: orange;">',
-      :on_black     => '<span style="background-color: black;">',
-      :on_silver    => '<span style="background-color: silver;">',
-      :on_gray      => '<span style="background-color: gray;">',
-      :on_white     => '<span style="background-color: white;">',
-      :on_maroon    => '<span style="background-color: maroon;">',
-      :on_red       => '<span style="background-color: red;">',
-      :on_purple    => '<span style="background-color: purple;">',
-      :on_fuchsia   => '<span style="background-color: fuchsia;">',
-      :on_green     => '<span style="background-color: green;">',
-      :on_lime      => '<span style="background-color: lime;">',
-      :on_olive     => '<span style="background-color: olive;">',
-      :on_yellow    => '<span style="background-color: yellow;">',
-      :on_navy      => '<span style="background-color: navy;">',
-      :on_blue      => '<span style="background-color: blue;">',
-      :on_teal      => '<span style="background-color: teal;">',
-      :on_aqua      => '<span style="background-color: aqua;">',
-      :on_orange    => '<span style="background-color: orange;">',
-      :bold         => '<span style="font-weight: bold;">',
-      :underline    => '<span style="text-decoration: underline;">',
-      :overline     => '<span style="text-decoration: overline;">',
-      :line_through => '<span style="text-decoration: line-through;">',
-      :blink        => '<span style="text-decoration: blink;">'
+    STYLES = {
+      :black        => 'color: black',
+      :silver       => 'color: silver',
+      :gray         => 'color: gray',
+      :white        => 'color: white',
+      :maroon       => 'color: maroon',
+      :red          => 'color: red',
+      :purple       => 'color: purple',
+      :fuchsia      => 'color: fuchsia',
+      :green        => 'color: green',
+      :lime         => 'color: lime',
+      :olive        => 'color: olive',
+      :yellow       => 'color: yellow',
+      :navy         => 'color: navy',
+      :blue         => 'color: blue',
+      :teal         => 'color: teal',
+      :aqua         => 'color: aqua',
+      :orange       => 'color: orange',
+      :on_black     => 'background-color: black',
+      :on_silver    => 'background-color: silver',
+      :on_gray      => 'background-color: gray',
+      :on_white     => 'background-color: white',
+      :on_maroon    => 'background-color: maroon',
+      :on_red       => 'background-color: red',
+      :on_purple    => 'background-color: purple',
+      :on_fuchsia   => 'background-color: fuchsia',
+      :on_green     => 'background-color: green',
+      :on_lime      => 'background-color: lime',
+      :on_olive     => 'background-color: olive',
+      :on_yellow    => 'background-color: yellow',
+      :on_navy      => 'background-color: navy',
+      :on_blue      => 'background-color: blue',
+      :on_teal      => 'background-color: teal',
+      :on_aqua      => 'background-color: aqua',
+      :on_orange    => 'background-color: orange',
+      :bold         => 'font-weight: bold',
+      :underline    => 'text-decoration: underline',
+      :overline     => 'text-decoration: overline',
+      :line_through => 'text-decoration: line-through',
+      :blink        => 'text-decoration: blink'
     }
 
     # HTML span begin tag
@@ -51,14 +51,12 @@ module Shiny
     SPAN_END   = "</span>"
 
     # Generate html format instance methods
-    # See FORMATS for a list of created methods
-    FORMATS.each do |name, value|
-      class_eval <<-DEF
-        def #{name.to_s}
-          @string = '#{value}' + @string + '#{SPAN_END}'
-          self
-        end
-      DEF
+    # See STYLES for a list of created methods
+    STYLES.each do |name, value|
+      define_method name do
+        @string = "<span style=\"#{value};\">#{@string}</span>"
+        self
+      end
     end
 
     # Remove all html span format tags
