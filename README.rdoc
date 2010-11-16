@@ -41,6 +41,17 @@ Some other html effect examples:
   "overline".html.overline
   "line-through".html.line_through
 
+Some terminal helper examples: (include Shiny::Helpers)
+
+  say("green day?", :color => :green)
+  say("fail!", :type => :error)
+
+  log("for later") # default: logfile.log
+  log("there please", "myfile.log")
+
+  wrap("I'm not alone") # surrounded with the default: # char
+  wrap("Oh...", "*") # surrounded with the * char
+
 == Note on Patches/Pull Requests
 
 * Fork the project.
