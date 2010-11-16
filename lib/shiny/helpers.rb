@@ -23,7 +23,7 @@ module Shiny
 
       message = message.ansi.send(options[:color]) if options[:color]
       message = format(message, options[:type]) unless options[:color]
-      message << "\n" if options[:linebreak]
+      message = message.to_s + "\n" if options[:linebreak]
 
       $stdout.print message
     end
