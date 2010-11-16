@@ -53,7 +53,6 @@ module Shiny
       :on_bright_magenta =>  "\e[105m",
       :on_bright_cyan    =>  "\e[106m",
       :on_bright_white   =>  "\e[107m",
-      :reset             =>    "\e[0m",
       :bold              =>    "\e[1m",
       :underline         =>    "\e[4m",
       :negative          =>    "\e[7m",
@@ -68,9 +67,8 @@ module Shiny
 
     # Generate color instance methods
     # See CODES for a list of the created methods
+    reset = :"\e[0m"
     CODES.each do |code, value|
-      next if code == :reset
-      reset = CODES[:reset]
       define_method code do
         @string = "#{value}#{@string}#{reset}"
         self
