@@ -71,14 +71,12 @@ module Shiny
     CODES.each do |code, value|
       next if code == :reset
       reset = CODES[:reset]
-      class_eval <<-DEF
-        def #{code.to_s}
-          @string = "#{value}" + @string + "#{reset}"
-          self
-        end
-      DEF
+      define_method code do
+        @string = "#{value}#{@string}#{reset}"
+        self
+      end
     end
-
+    
     # Remove all ansi escape sequences from the string
     #
     # @return [String] from ansi escape sequences cleaned
