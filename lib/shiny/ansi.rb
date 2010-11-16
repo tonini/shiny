@@ -1,9 +1,9 @@
 module Shiny
-  # Shiny::ANSI gives you some common ansi escape sequences, which
-  # are available over a defined proxy method called 'shell', in
-  # the core ruby String class.
+  # The ansi class serve a great list of color and a few format
+  # methods. To get an overview of all the generetad method, just look
+  # at the CODES hash
   #
-  # Some colors examples:
+  # Some color examples:
   #
   # puts "magenta".shell.magenta
   # puts "bold blue".shell.bold.blue
@@ -66,7 +66,8 @@ module Shiny
     # list of available ansi effects
     EFFECTS = ['bold', 'underline', 'negative', 'blink']
 
-    # generate instance methods
+    # Generate color instance methods
+    # See CODES for a list of the created methods
     CODES.each do |code, value|
       next if code == :reset
       reset = CODES[:reset]
@@ -78,7 +79,9 @@ module Shiny
       DEF
     end
 
-    # remove all ansi escape sequences
+    # Remove all ansi escape sequences from the string
+    #
+    # @return [String] from ansi escape sequences cleaned
     def blank
       @string.gsub(/\e\[[0-9]+m/,'')
     end

@@ -2,16 +2,22 @@ require 'shiny/basic'
 require 'shiny/ansi'
 require 'shiny/html'
 
-# instead to extend the ruby core string class with all the ansi
-# escape and html methods, there are two proxy methods called ansi and
-# html, to serve all the functionality.
+# Extend the ruby core string class with ansi escape
+# sequences and html methods through two proxy methods
 class String
+
+  # Serves ansi escape sequence method through a new ansi object
+  #
+  # @return [Shiny::ANSI] a new object
   def ansi
     Shiny::ANSI.new(self)
   end
 
   alias shell ansi
 
+  # Serves ansi escape sequence method through a new html object
+  #
+  # @return [Shiny::HTML] a new object
   def html
     Shiny::HTML.new(self)
   end
