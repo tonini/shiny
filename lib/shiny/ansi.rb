@@ -1,7 +1,7 @@
 module Shiny
-  # The ansi class serve a great list of color and a few format
-  # methods. To get an overview of all the generetad method, just look
-  # at the CODES hash
+  # The ansi class serves a large list of color and a few format
+  # methods. To get an overview of all the generated methods, just look
+  # at the CODES hash.
   #
   # Some color examples:
   #
@@ -67,10 +67,9 @@ module Shiny
 
     # Generate color instance methods
     # See CODES for a list of the created methods
-    reset = :"\e[0m"
     CODES.each do |code, value|
       define_method code do
-        @string = "#{value}#{@string}#{reset}"
+        @string = "#{value}#{@string}\e[0m"
         self
       end
     end
