@@ -1,4 +1,4 @@
-= shiny
+= Shiny
 
 Shiny extends the ruby core string class with two methods, ansi and html. These two are proxy methods to provide a bunch of color and text formating methods.
 Over ansi there are the commen known ansi escape sequences available, bold, blink, underline and the whole colorful format things. The method html serves the same but in the html way, it makes the
@@ -45,7 +45,9 @@ Some other html effect examples:
   "overline".html.overline
   "line-through".html.line_through
 
-Some terminal helper examples: (include Shiny::Helpers)
+Some terminal helper examples:
+
+  include Shiny::Helpers
 
   say("green day?", :color => :green)
   say("fail!", :type => :error)
