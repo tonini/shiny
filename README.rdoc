@@ -10,6 +10,10 @@ standart w3c color names available and also a few other formats like overline, u
 
 == Usage
 
+First require it:
+
+  require 'shiny'
+
 Some ansi color examples:
 
   puts "magenta".ansi.magenta
