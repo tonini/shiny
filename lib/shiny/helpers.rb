@@ -51,7 +51,13 @@ module Shiny
     # @param [String] sign ('#') The character around the message
     def wrap(message, sign="#")
       sign = sign[0] if  sign.length > 1
-      around = sign * (message.length + 4) + "\n"
+
+      to_ignore = 0
+      message.gsub(/\e\[[0-9]+m/) do |m|
+        to_ignore += m.length
+      end
+
+      around = sign * ((message.length - to_ignore) + 4) + "\n"
 
       output = ""
       output << around

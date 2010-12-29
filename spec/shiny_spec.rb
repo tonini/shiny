@@ -57,6 +57,15 @@ describe Shiny do
       $stdout.should_receive(:print).with(output)
       wrap("Hello I'm wrapped", "*")
     end
+
+    it "should not count escape sequences as characters" do
+      output =  "###########\n"
+      output += "# \e[31mI'm red\e[0m #\n"
+      output += "###########\n"
+
+      $stdout.should_receive(:print).with(output)
+      wrap("\e[31mI'm red\e[0m")
+    end
   end
 
   describe "#log" do
