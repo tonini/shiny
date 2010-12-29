@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "shiny"
-  s.version     = "0.3.1"
+  s.version     = "0.3.2"
   s.author      = "Samuel Tonini"
   s.email       = "tonini.samuel@gmail.com"
   s.homepage    = "http://github.com/zastav/shiny"
