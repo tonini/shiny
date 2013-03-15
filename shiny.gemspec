@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = "0.3.2"
   s.author      = "Samuel Tonini"
   s.email       = "tonini.samuel@gmail.com"
-  s.homepage    = "http://github.com/zastav/shiny"
+  s.homepage    = "http://github.com/tonini/shiny"
   s.summary     = "Shiny ansi and html format methods."
   s.description = "Some common nice and shiny ansi escapse sequences and html format tags for the daily grind in the shell and browser."
 
