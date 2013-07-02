@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/tonini/shiny.png)](https://travis-ci.org/tonini/shiny)
+[![Code Climate](https://codeclimate.com/github/tonini/shiny.png)](https://codeclimate.com/github/tonini/shiny)
+
 # Shiny
 
 Shiny extends the ruby core string class with two methods, ansi and html. These two are proxy methods to provide a bunch of color and text formating methods.
