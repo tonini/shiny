@@ -86,3 +86,5 @@ wrap("Oh...", "*") # surrounded with the * char
 ## License
 
 See [LICENSE](LICENSE) for details.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/62fbdb657e6658c40ccff448a42ad301 "githalytics.com")](http://githalytics.com/tonini/shiny)
